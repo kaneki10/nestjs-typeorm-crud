@@ -11,7 +11,7 @@ async function bootstrap() {
   });
 
   app.enableCors({
-    origin: 'https://smg.sagtech.io',
+    origin: 'http://localhost:3000',
     credentials: true,
   });
 
@@ -29,7 +29,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('HealTouch')
-    .setDescription('Sag SMG API description')
+    .setDescription('healtouch description')
     .setVersion('0.2')
     .addBearerAuth()
     .addCookieAuth()
