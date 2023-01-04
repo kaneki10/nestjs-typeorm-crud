@@ -23,6 +23,13 @@ export class UserRepository {
       .getOne();
   }
 
+  async getByEmail(email: string): Promise<User> {
+    return this.userRepository
+      .createQueryBuilder('user')
+      .where('user.email = :email', { email })
+      .getOne();
+  }
+
   async remove(id: string): Promise<DeleteResult> {
     return this.userRepository
       .createQueryBuilder()
