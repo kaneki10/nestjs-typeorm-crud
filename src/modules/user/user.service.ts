@@ -1,5 +1,6 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { DataSource, EntityManager } from 'typeorm';
+import { MailService } from '../mail/mail.service';
 import { CreateUserDto, UpdateUserDto } from './dto';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
@@ -9,6 +10,7 @@ export class UserService {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly connection: DataSource,
+    private readonly mailService: MailService,
   ) {}
 
   async getAll() {
@@ -44,7 +46,7 @@ export class UserService {
     await this.connection.transaction(async (manager: EntityManager) => {
       await manager.save(user);
     });
-
+    await this.mailService.register({ ...user, password: value.password });
     const currentUser = await this.getById(user.id);
     return currentUser;
   }
