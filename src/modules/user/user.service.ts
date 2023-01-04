@@ -26,6 +26,14 @@ export class UserService {
     return user;
   }
 
+  async getByEmail(email: string) {
+    const user = await this.userRepository.getByEmail(email);
+    if (!user) {
+      throw new HttpException('User not Found', HttpStatus.NOT_FOUND);
+    }
+    return user;
+  }
+
   async delete(id: string) {
     const response = await this.userRepository.remove(id);
   }
