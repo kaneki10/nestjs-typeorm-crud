@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  BaseEntity,
+  OneToMany,
+} from 'typeorm';
+import { SubCategory } from '../sub-category/sub-category.entity';
 
 @Entity({ name: 'category' })
 export class Category extends BaseEntity {
@@ -6,9 +13,12 @@ export class Category extends BaseEntity {
   id: string;
 
   @Column('simple-json')
-  title:{
-    uz:string,
-    ru:string,
-    en:string
-  }
+  title: {
+    uz: string;
+    ru: string;
+    en: string;
+  };
+
+  @OneToMany(() => SubCategory, (subCategory) => subCategory)
+  subCategories: SubCategory[];
 }

@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsObject } from 'class-validator';
+import { IsNotEmpty, IsObject, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 class CreateSubCategory {
@@ -17,6 +17,14 @@ class CreateSubCategory {
     ru: string;
     en: string;
   };
+
+  @ApiProperty({
+    description: 'Category ID',
+    example: '2dc69470-c45d-4cee-bc68-132ed342fb3b',
+  })
+  @IsNotEmpty()
+  @IsString()
+  category: string;
 }
 
 export default CreateSubCategory;
