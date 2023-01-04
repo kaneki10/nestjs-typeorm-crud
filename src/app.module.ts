@@ -9,6 +9,7 @@ import { ProductModule } from './modules/product/product.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
 import { MailModule } from './modules/mail/mail.module';
+import { ProductTagModule } from './modules/product-tag/product-tag.module';
 
 import configuration from './config';
 @Module({
@@ -32,6 +33,7 @@ import configuration from './config';
     AuthModule,
     UserModule,
     MailModule,
+    ProductTagModule,
   ],
 })
 export class AppModule {}
