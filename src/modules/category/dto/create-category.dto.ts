@@ -1,5 +1,8 @@
 import { IsNotEmpty, IsObject } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { LanguageDto } from '../../../infra/shared/dto';
+import { parseTextToObject } from '../../../infra/helpers';
+import { Transform } from 'class-transformer';
 
 class CreateCategory {
   @ApiProperty({
@@ -12,11 +15,10 @@ class CreateCategory {
   })
   @IsNotEmpty()
   @IsObject()
-  readonly title: {
-    uz: string;
-    ru: string;
-    en: string;
-  };
+  @Transform(({ value }: { value: string }) =>
+    parseTextToObject('title', value),
+  )
+  readonly title: LanguageDto;
 }
 
 export default CreateCategory;

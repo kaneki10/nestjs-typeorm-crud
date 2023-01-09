@@ -1,5 +1,6 @@
 import { IsNotEmpty, IsObject, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { LanguageDto } from '../../../infra/shared/dto';
 
 class CreateSubCategory {
   @ApiProperty({
@@ -12,11 +13,7 @@ class CreateSubCategory {
   })
   @IsNotEmpty()
   @IsObject()
-  readonly title: {
-    uz: string;
-    ru: string;
-    en: string;
-  };
+  readonly title: LanguageDto;
 
   @ApiProperty({
     description: 'Category ID',
