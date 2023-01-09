@@ -1,5 +1,6 @@
 import { IsOptional, IsObject } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { LanguageDto } from '../../../infra/shared/dto';
 
 class UpdateSubCategory {
   @ApiProperty({
@@ -12,11 +13,7 @@ class UpdateSubCategory {
   })
   @IsOptional()
   @IsObject()
-  readonly title: {
-    uz: string;
-    ru: string;
-    en: string;
-  };
+  readonly title: LanguageDto;
 }
 
 export default UpdateSubCategory;

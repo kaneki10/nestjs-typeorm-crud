@@ -1,5 +1,8 @@
 import { IsOptional, IsObject } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { LanguageDto } from '../../../infra/shared/dto';
+import { Transform } from 'class-transformer';
+import { parseTextToObject } from '../../../infra/helpers';
 
 class UpdateCategory {
   @ApiProperty({
@@ -12,11 +15,10 @@ class UpdateCategory {
   })
   @IsOptional()
   @IsObject()
-  readonly title: {
-    uz: string;
-    ru: string;
-    en: string;
-  };
+  @Transform(({ value }: { value: string }) =>
+    parseTextToObject('title', value),
+  )
+  readonly title: LanguageDto;
 }
 
 export default UpdateCategory;

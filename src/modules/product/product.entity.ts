@@ -6,6 +6,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
+import { LanguageDto } from '../../infra/shared/dto';
 import { Brand } from '../brand/brand.entity';
 import { Category } from '../category/category.entity';
 import { SubCategory } from '../sub-category/sub-category.entity';
@@ -16,21 +17,13 @@ export class Product extends BaseEntity {
   id: string;
 
   @Column('simple-json')
-  title: {
-    uz: string;
-    ru: string;
-    en: string;
-  };
+  title: LanguageDto;
 
   @Column()
   price: string;
 
   @Column('simple-json')
-  about: {
-    uz: string;
-    ru: string;
-    en: string;
-  };
+  about: LanguageDto;
 
   @Column({ nullable: true })
   rate: number;
