@@ -6,9 +6,12 @@ import {
   ManyToOne,
   JoinColumn,
   ManyToMany,
+  OneToOne,
+  OneToMany,
 } from 'typeorm';
 import { LanguageDto } from '../../infra/shared/dto';
 import { Brand } from '../brand/brand.entity';
+import { FileEntity } from '../file/file.entity';
 import { ProductTag } from '../product-tag/product-tag.entity';
 import { SubCategory } from '../sub-category/sub-category.entity';
 
@@ -43,4 +46,13 @@ export class Product extends BaseEntity {
     onDelete: 'CASCADE',
   })
   productTags: ProductTag[];
+
+  @OneToOne(() => FileEntity, (file) => file.product, {
+    onDelete: 'SET NULL',
+  })
+  @JoinColumn()
+  avatar: FileEntity;
+
+  @OneToMany(() => FileEntity, (file) => file.productView)
+  views: FileEntity[];
 }

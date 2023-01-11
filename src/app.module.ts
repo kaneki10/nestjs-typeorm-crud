@@ -12,6 +12,7 @@ import { ProductTagModule } from './modules/product-tag/product-tag.module';
 import { ProductModule } from './modules/product/product.module';
 
 import configuration from './config';
+import { FileModule } from './modules/file/file.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -34,6 +35,7 @@ import configuration from './config';
     MailModule,
     ProductTagModule,
     ProductModule,
+    FileModule,
   ],
 })
 export class AppModule {}
