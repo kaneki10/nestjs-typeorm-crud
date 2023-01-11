@@ -5,10 +5,11 @@ import {
   BaseEntity,
   ManyToOne,
   JoinColumn,
+  ManyToMany,
 } from 'typeorm';
 import { LanguageDto } from '../../infra/shared/dto';
 import { Brand } from '../brand/brand.entity';
-import { Category } from '../category/category.entity';
+import { ProductTag } from '../product-tag/product-tag.entity';
 import { SubCategory } from '../sub-category/sub-category.entity';
 
 @Entity({ name: 'product' })
@@ -33,16 +34,13 @@ export class Product extends BaseEntity {
   brand: Brand;
 
   @ManyToOne(() => SubCategory, (subCategory) => subCategory.category, {
-    cascade: true,
     onDelete: 'CASCADE',
   })
   @JoinColumn()
   subCategory: SubCategory;
 
-  @ManyToOne(() => Category, (category) => category.products, {
-    cascade: true,
+  @ManyToMany(() => ProductTag, (productTag) => productTag.products, {
     onDelete: 'CASCADE',
   })
-  @JoinColumn()
-  category: Category;
+  productTags: ProductTag[];
 }

@@ -5,9 +5,11 @@ import {
   BaseEntity,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { LanguageDto } from '../../infra/shared/dto';
 import { Category } from '../category/category.entity';
+import { Product } from '../product/product.entity';
 
 @Entity({ name: 'sub_category' })
 export class SubCategory extends BaseEntity {
@@ -23,4 +25,7 @@ export class SubCategory extends BaseEntity {
   })
   @JoinColumn()
   category: Category;
+
+  @OneToMany(() => Product, (product) => product.subCategory)
+  products: Product[];
 }
